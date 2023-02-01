@@ -34,4 +34,19 @@ export class TodoListService {
   getAll(): IToDoItem[] {
     return this.todoList;
   }
+
+  updateOrAdd(newTodo: IToDoItem) {
+    const findIndex = this.todoList.findIndex((todo) => todo.id === newTodo.id);
+    if (findIndex < 0) {
+      this.todoList.push({
+        ...newTodo,
+        id: this.todoList.length,
+      });
+    } else {
+      this.todoList[findIndex] = {
+        ...newTodo,
+        id: this.todoList[findIndex].id,
+      };
+    }
+  }
 }
